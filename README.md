@@ -1,15 +1,22 @@
+<p align="center">
+    <img src="https://imgur.com/XGAjQji.png" alt="Bank Churn Cover" width="600"/>
+</p>
+
 # Project Outline
+
 - **[1- Problem Statement](#1)**
-    - [1.1 The Challenge](#1.1)
-    - [1.2 About Dataset](#1.2)
+  - [1.1 The Challenge](#1.1)
+  - [1.2 About Dataset](#1.2)
 - **[2- Loading Packages](#2)**
 
 ### EDA
+
 - **[3- Univariate Analysis](#3)**
 - **[4- Bivariate Analysis](#4)**
 - **[5- Conclusion](#5)**
 
 ### Machine Learning
+
 - **[6- Data Preprocessing](#6)**
 - **[7- BEAST Model 💡](#7)**
 - **[8- Error Analysis](#8)**
@@ -21,14 +28,19 @@
 <br>
 
 <a name='1'></a>
+
 # 1- Problem Statement
+
 <a name='1.1'></a>
+
 ### 1.1 The Challenge
+
 <font size=4>
 For this Competition, The task is to predict whether a customer continues with their account or closes it (e.g., churns)!
 </font>
 
 <a name='1.2'></a>
+
 ### 1.2 About Dataset
 
 <font size=4>
@@ -47,20 +59,14 @@ The bank customer churn dataset is a commonly used dataset for predicting custom
 - IsActiveMember: Whether the customer is an active member (1 = yes, 0 = no)
 - EstimatedSalary: The estimated salary of the customer
 - Exited: Whether the customer has churned (1 = yes, 0 = no)
-    
+
 </font>
-
-
-<div style="text-align:center">
-    <img src="https://imgur.com/XGAjQji.png" alt="Bank Churn Picture" style="width:90%;">
-</div>
 
 <br>
 <br>
 <br>
 
 ---
-
 
 <br>
 <br>
@@ -71,6 +77,7 @@ The bank customer churn dataset is a commonly used dataset for predicting custom
 <br>
 
 <a name='6'></a>
+
 # 5- Analysis Conclusion
 
 <font size=4> 
@@ -106,7 +113,7 @@ In conclusion, leveraging the insights gained from exploratory analysis and feat
 <br>
 <br>
 
---- 
+---
 
 ![alt text](image.png)
 
@@ -114,7 +121,7 @@ In conclusion, leveraging the insights gained from exploratory analysis and feat
 
 <font size=5> Thank you for reaching this point. I hope you enjoyed the journey. 😁🎉❤️</font>
 
-<font size=4> Note that machine learning process is iterative cyclic in nature, so all results (features, setting hyperparameter) come after alot of *Tuning* process</font>
+<font size=4> Note that machine learning process is iterative cyclic in nature, so all results (features, setting hyperparameter) come after alot of _Tuning_ process</font>
 
 <div style="text-align:center">
     <img src="https://imgur.com/oM7stCr.gif" alt="Bank Churn Picture" style="width:40%;">
