@@ -1,103 +1,16 @@
-import joblib
-import pandas as pd
-import logging
 from flask import Flask, render_template, request, jsonify
-
-from sklearn import set_config
 from utils import *
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
 
-
-# Initialize Flask app
 app = Flask(__name__)
-
-
-def load_models(preprocessing_path='../models/preprocessing_pipeline.joblib',
-                model_path='../models/model.joblib'):
-    """Load the preprocessing pipeline and the model"""
-    logger.info("Loading models...")
-    try:
-        preprocessing = joblib.load(preprocessing_path)
-        model = joblib.load(model_path)
-        logger.info("Models loaded successfully")
-        return preprocessing, model
-    except Exception as e:
-        logger.error(f"Error loading models: {str(e)}")
-        raise
-
-
-def prepare_input(request_data: dict) -> pd.DataFrame:
-    """Convert request data to a DataFrame."""
-    try:
-        logger.info("Preparing input data...")
-        input_data = {
-            'id': 3,
-            'CustomerId': int(request_data.get('CustomerId', 0)),
-            'Surname': request_data.get('Surname', ''),
-            'CreditScore': float(request_data['CreditScore']),
-            'Geography': request_data['Geography'],
-            'Gender': request_data['Gender'],
-            'Age': float(request_data['Age']),
-            'Tenure': float(request_data['Tenure']),
-            'Balance': float(request_data['Balance']),
-            'NumOfProducts': float(request_data['NumOfProducts']),
-            'HasCrCard': float(request_data['HasCrCard']),
-            'IsActiveMember': float(request_data['IsActiveMember']),
-            'EstimatedSalary': float(request_data['EstimatedSalary']),
-        }
-        return pd.DataFrame([input_data])
-    except Exception as e:
-        logger.error(f"Error preparing input data: {str(e)}")
-        raise
-
-
-def predict_churn(input_df: pd.DataFrame, preprocessor, model) -> tuple:
-    """Predict churn probability."""
-    try:
-        logger.info("Processing input data with the preprocessor...")
-        processed_data = preprocessor.transform(input_df)
-
-        # Predict churn probability
-        logger.info("Making predictions...")
-        predictions = model.transform(processed_data)
-        churn_prob = predictions[0]  # Assuming the model outputs probabilities
-        prediction = 'Churn' if churn_prob > 0.5 else 'Not Churn'
-        return churn_prob, prediction
-    except Exception as e:
-        logger.error(f"Error during prediction: {str(e)}")
-        raise
-
-
-def load_test_data():
-    """Load test data for the sample feature."""
-    try:
-        logger.info("Loading test data...")
-        test_data = pd.read_csv(
-            '../models/data/playground-series-s4e1/test.csv')
-        logger.info("Test data loaded successfully.")
-        return test_data
-    except Exception as e:
-        logger.error(f"Error loading test data: {str(e)}")
-        raise
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     set_config(transform_output='pandas')
     if request.method == 'POST':
         try:
-            # Log received form data
-            logger.info(f"Form input data: {request.form}")
-
-            # Existing code for input_data creation
             input_data = {
-                'id': 3,
+                'id': 0,
                 'CustomerId': int(request.form.get('CustomerId', 0)),
                 'Surname': request.form.get('Surname', ''),
                 'CreditScore': float(request.form['CreditScore']),
@@ -141,21 +54,13 @@ def use_sample():
 
 
 def main():
-    """Main execution function."""
     global preprocessor, model, test_data
 
-    # Load models and test data
     preprocessor, model = load_models()
     test_data = load_test_data()
 
-    # Run the Flask app
     app.run(debug=False)
 
 
 if __name__ == "__main__":
-    # preprocessor, model = load_models()
-    # test_data = load_test_data()
-    # test_sample = test_data.sample(1)
-    # churn_prob, prediction = predict_churn(test_sample, preprocessor, model)
-    # print(f"Test churn probability: {churn_prob}, Prediction: {prediction}")
     main()
