@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Customer Churn Prediction</h2>
+    <form id="churnForm" method="POST">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="CustomerId">Customer ID</label>
+                <input type="number" id="CustomerId" name="CustomerId" value="{{ sample_data.get('CustomerId', '') }}">
+            </div>
+            <div class="form-group">
+                <label for="Surname">Surname</label>
+                <input type="text" id="Surname" name="Surname" value="{{ sample_data.get('Surname', '') }}">
+            </div>
+            <div class="form-group">
+                <label for="CreditScore">Credit Score</label>
+                <input type="number" id="CreditScore" name="CreditScore"
+                    value="{{ sample_data.get('CreditScore', '') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="Geography">Geography</label>
+                <select id="Geography" name="Geography" required>
+                    <option value="France" {% if sample_data.get('Geography')=='France' %}selected{% endif %}>France
+                    </option>
+                    <option value="Spain" {% if sample_data.get('Geography')=='Spain' %}selected{% endif %}>Spain
+                    </option>
+                    <option value="Germany" {% if sample_data.get('Geography')=='Germany' %}selected{% endif %}>Germany
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select id="Gender" name="Gender" required>
+                    <option value="Male" {% if sample_data.get('Gender')=='Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if sample_data.get('Gender')=='Female' %}selected{% endif %}>Female
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Age">Age</label>
+                <input type="number" step="0.1" id="Age" name="Age" value="{{ sample_data.get('Age', '') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="Tenure">Tenure</label>
+                <input type="number" step="0.1" id="Tenure" name="Tenure" value="{{ sample_data.get('Tenure', '') }}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="Balance">Balance</label>
+                <input type="number" step="0.01" id="Balance" name="Balance"
+                    value="{{ sample_data.get('Balance', '') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="NumOfProducts">Number of Products</label>
+                <input type="number" step="0.1" id="NumOfProducts" name="NumOfProducts"
+                    value="{{ sample_data.get('NumOfProducts', '') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="HasCrCard">Has Credit Card</label>
+                <select id="HasCrCard" name="HasCrCard" required>
+                    <option value="1.0" {% if sample_data.get('HasCrCard')==1.0 %}selected{% endif %}>Yes</option>
+                    <option value="0.0" {% if sample_data.get('HasCrCard')==0.0 %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="IsActiveMember">Is Active Member</label>
+                <select id="IsActiveMember" name="IsActiveMember" required>
+                    <option value="1.0" {% if sample_data.get('IsActiveMember')==1.0 %}selected{% endif %}>Yes</option>
+                    <option value="0.0" {% if sample_data.get('IsActiveMember')==0.0 %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="EstimatedSalary">Estimated Salary</label>
+                <input type="number" step="0.01" id="EstimatedSalary" name="EstimatedSalary"
+                    value="{{ sample_data.get('EstimatedSalary', '') }}" required>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="useSampleBtn" class="secondary-button">Use Sample</button>
+            <button type="button" id="clearFormBtn" class="secondary-button">Clear Form</button>
+            <button type="submit" class="primary-button">Predict Churn</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('useSampleBtn').addEventListener('click', function () {
+        fetch('/use_sample')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error fetching sample data: ' + data.error);
+                    return;
+                }
+                for (let [key, value] of Object.entries(data)) {
+                    const field = document.getElementById(key);
+                    if (field) field.value = value;
+                }
+            });
+    });
+
+    document.getElementById('clearFormBtn').addEventListener('click', function () {
+        document.getElementById('churnForm').reset();
+    });
+</script>
+{% endblock %}

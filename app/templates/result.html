@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="result-container">
+    <h2>Churn Prediction Result</h2>
+    <div class="result-card">
+        <div class="prediction-summary">
+            <h3>Customer Churn Prediction</h3>
+            <p class="prediction-text">
+                Prediction: <strong>{{ prediction }}</strong>
+            </p>
+            <p class="probability-text">
+                Probability of Churn: <strong>{{ churn_prob }}%</strong>
+            </p>
+        </div>
+        <div class="input-details">
+            <h3>Input Details</h3>
+            <table>
+                {% for key, value in data.items() %}
+                <tr>
+                    <td><strong>{{ key }}</strong></td>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="result-actions">
+        <a href="/" class="primary-button">Make Another Prediction</a>
+    </div>
+</div>
+{% endblock %}

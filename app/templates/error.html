@@ -1,0 +1,11 @@
+<!-- error.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="error-container">
+    <h2>Error</h2>
+    <p>Something went wrong:</p>
+    <p class="error-message">{{ error }}</p>
+    <a href="/" class="button">Go Back</a>
+</div>
+{% endblock %}
