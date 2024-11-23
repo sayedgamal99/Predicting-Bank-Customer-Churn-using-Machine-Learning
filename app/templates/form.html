@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="NumOfProducts">Number of Products</label>
-                <input type="number" step="0.1" id="NumOfProducts" name="NumOfProducts"
+                <input type="number" step="1" id="NumOfProducts" name="NumOfProducts"
                     value="{{ sample_data.get('NumOfProducts', '') }}" required>
             </div>
             <div class="form-group">
@@ -85,22 +85,36 @@
 
 <script>
     document.getElementById('useSampleBtn').addEventListener('click', function () {
-        fetch('/use_sample')
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('Error fetching sample data: ' + data.error);
-                    return;
-                }
-                for (let [key, value] of Object.entries(data)) {
-                    const field = document.getElementById(key);
-                    if (field) field.value = value;
-                }
-            });
-    });
+            fetch('/use_sample')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error fetching sample data: ' + data.error);
+                        return;
+                    }
+                    for (let [key, value] of Object.entries(data)) {
+                        const field = document.getElementById(key);
+                        if (field) {
+                            if (field.tagName === 'SELECT') {
+                                const stringValue = typeof value === 'number' ? value.toFixed(1) : value;
+                                const option = Array.from(field.options).find(opt => opt.value === stringValue);
+                                if (option) {
+                                    field.value = stringValue;
+                                }
+                            } else {
+                                field.value = value;
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching sample data');
+                });
+        });
 
-    document.getElementById('clearFormBtn').addEventListener('click', function () {
-        document.getElementById('churnForm').reset();
-    });
+        document.getElementById('clearFormBtn').addEventListener('click', function () {
+            document.getElementById('churnForm').reset();
+        });
 </script>
 {% endblock %}
