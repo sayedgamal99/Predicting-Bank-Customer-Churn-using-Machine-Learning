@@ -24,7 +24,7 @@ def home():
                 'IsActiveMember': float(request.form['IsActiveMember']),
                 'EstimatedSalary': float(request.form['EstimatedSalary']),
             }
-            
+
             input_df = pd.DataFrame([input_data])
 
             # Call predict_churn
@@ -59,8 +59,7 @@ def main():
     preprocessor, model = load_models()
     test_data = load_test_data()
 
-    app.run(debug=False)
-
+    app.run(debug=False, host='0.0.0.0', port=5000)
 
 if __name__ == "__main__":
     main()
