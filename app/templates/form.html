@@ -1,120 +1,166 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="form-container">
-    <h2>Customer Churn Prediction</h2>
-    <form id="churnForm" method="POST">
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="CustomerId">Customer ID</label>
-                <input type="number" id="CustomerId" name="CustomerId" value="{{ sample_data.get('CustomerId', '') }}">
-            </div>
-            <div class="form-group">
-                <label for="Surname">Surname</label>
-                <input type="text" id="Surname" name="Surname" value="{{ sample_data.get('Surname', '') }}">
-            </div>
-            <div class="form-group">
-                <label for="CreditScore">Credit Score</label>
-                <input type="number" id="CreditScore" name="CreditScore"
-                    value="{{ sample_data.get('CreditScore', '') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="Geography">Geography</label>
-                <select id="Geography" name="Geography" required>
-                    <option value="France" {% if sample_data.get('Geography')=='France' %}selected{% endif %}>France
-                    </option>
-                    <option value="Spain" {% if sample_data.get('Geography')=='Spain' %}selected{% endif %}>Spain
-                    </option>
-                    <option value="Germany" {% if sample_data.get('Geography')=='Germany' %}selected{% endif %}>Germany
-                    </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Gender">Gender</label>
-                <select id="Gender" name="Gender" required>
-                    <option value="Male" {% if sample_data.get('Gender')=='Male' %}selected{% endif %}>Male</option>
-                    <option value="Female" {% if sample_data.get('Gender')=='Female' %}selected{% endif %}>Female
-                    </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Age">Age</label>
-                <input type="number" step="0.1" id="Age" name="Age" value="{{ sample_data.get('Age', '') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="Tenure">Tenure</label>
-                <input type="number" step="0.1" id="Tenure" name="Tenure" value="{{ sample_data.get('Tenure', '') }}"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="Balance">Balance</label>
-                <input type="number" step="0.01" id="Balance" name="Balance"
-                    value="{{ sample_data.get('Balance', '') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="NumOfProducts">Number of Products</label>
-                <input type="number" step="1" id="NumOfProducts" name="NumOfProducts"
-                    value="{{ sample_data.get('NumOfProducts', '') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="HasCrCard">Has Credit Card</label>
-                <select id="HasCrCard" name="HasCrCard" required>
-                    <option value="1.0" {% if sample_data.get('HasCrCard')==1.0 %}selected{% endif %}>Yes</option>
-                    <option value="0.0" {% if sample_data.get('HasCrCard')==0.0 %}selected{% endif %}>No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="IsActiveMember">Is Active Member</label>
-                <select id="IsActiveMember" name="IsActiveMember" required>
-                    <option value="1.0" {% if sample_data.get('IsActiveMember')==1.0 %}selected{% endif %}>Yes</option>
-                    <option value="0.0" {% if sample_data.get('IsActiveMember')==0.0 %}selected{% endif %}>No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="EstimatedSalary">Estimated Salary</label>
-                <input type="number" step="0.01" id="EstimatedSalary" name="EstimatedSalary"
-                    value="{{ sample_data.get('EstimatedSalary', '') }}" required>
+<div class="page-container">
+    <aside class="sidebar">
+        <div class="info-card">
+            <h2>About Customer Churn Prediction</h2>
+            <div class="info-content">
+                <div class="info-item">
+                    <div class="info-icon">📊</div>
+                    <h3>What is Customer Churn?</h3>
+                    <p>Customer churn refers to when customers stop doing business with a company. In banking, this
+                        means customers closing their accounts or switching to another bank.</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🎯</div>
+                    <h3>How It Works</h3>
+                    <p>Our AI model analyzes various customer attributes including credit score, geography, age, and
+                        banking behavior to predict the likelihood of customer churn.</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">💡</div>
+                    <h3>Using the Predictor</h3>
+                    <p>Fill in the customer details in the form, or click "Use Sample" to test with example data. The
+                        model will provide a prediction and probability of customer churn.</p>
+                </div>
+                <div class="info-item contact-section">
+                    <div class="info-icon">👨‍💻</div>
+                    <h3>Contact Developer</h3>
+                    <div class="contact-details">
+                        <p><strong>Name:</strong> Sayed Gamal</p>
+                        <p><strong>Email:</strong> sayyedgamall@gmail.com</p>
+                        <p><strong>Location:</strong> Egypt</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-actions">
-            <button type="button" id="useSampleBtn" class="secondary-button">Use Sample</button>
-            <button type="button" id="clearFormBtn" class="secondary-button">Clear Form</button>
-            <button type="submit" class="primary-button">Predict Churn</button>
+    </aside>
+
+    <main class="main-content">
+        <div class="form-container">
+            <h2>Customer Churn Prediction</h2>
+            <form id="churnForm" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="CustomerId">Customer ID</label>
+                        <input type="number" id="CustomerId" name="CustomerId"
+                            value="{{ sample_data.get('CustomerId', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="Surname">Surname</label>
+                        <input type="text" id="Surname" name="Surname" value="{{ sample_data.get('Surname', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="CreditScore">Credit Score</label>
+                        <input type="number" id="CreditScore" name="CreditScore"
+                            value="{{ sample_data.get('CreditScore', '') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Geography">Geography</label>
+                        <select id="Geography" name="Geography" required>
+                            <option value="France" {% if sample_data.get('Geography')=='France' %}selected{% endif %}>
+                                France</option>
+                            <option value="Spain" {% if sample_data.get('Geography')=='Spain' %}selected{% endif %}>
+                                Spain</option>
+                            <option value="Germany" {% if sample_data.get('Geography')=='Germany' %}selected{% endif %}>
+                                Germany</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Gender">Gender</label>
+                        <select id="Gender" name="Gender" required>
+                            <option value="Male" {% if sample_data.get('Gender')=='Male' %}selected{% endif %}>Male
+                            </option>
+                            <option value="Female" {% if sample_data.get('Gender')=='Female' %}selected{% endif %}>
+                                Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Age">Age</label>
+                        <input type="number" step="0.1" id="Age" name="Age" value="{{ sample_data.get('Age', '') }}"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tenure">Tenure</label>
+                        <input type="number" step="0.1" id="Tenure" name="Tenure"
+                            value="{{ sample_data.get('Tenure', '') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Balance">Balance</label>
+                        <input type="number" step="0.01" id="Balance" name="Balance"
+                            value="{{ sample_data.get('Balance', '') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="NumOfProducts">Number of Products</label>
+                        <input type="number" step="1" id="NumOfProducts" name="NumOfProducts"
+                            value="{{ sample_data.get('NumOfProducts', '') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="HasCrCard">Has Credit Card</label>
+                        <select id="HasCrCard" name="HasCrCard" required>
+                            <option value="1.0" {% if sample_data.get('HasCrCard')==1.0 %}selected{% endif %}>Yes
+                            </option>
+                            <option value="0.0" {% if sample_data.get('HasCrCard')==0.0 %}selected{% endif %}>No
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="IsActiveMember">Is Active Member</label>
+                        <select id="IsActiveMember" name="IsActiveMember" required>
+                            <option value="1.0" {% if sample_data.get('IsActiveMember')==1.0 %}selected{% endif %}>Yes
+                            </option>
+                            <option value="0.0" {% if sample_data.get('IsActiveMember')==0.0 %}selected{% endif %}>No
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="EstimatedSalary">Estimated Salary</label>
+                        <input type="number" step="0.01" id="EstimatedSalary" name="EstimatedSalary"
+                            value="{{ sample_data.get('EstimatedSalary', '') }}" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="useSampleBtn" class="secondary-button">Use Sample</button>
+                    <button type="button" id="clearFormBtn" class="secondary-button">Clear Form</button>
+                    <button type="submit" class="primary-button">Predict Churn</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </main>
 </div>
 
 <script>
     document.getElementById('useSampleBtn').addEventListener('click', function () {
-            fetch('/use_sample')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert('Error fetching sample data: ' + data.error);
-                        return;
-                    }
-                    for (let [key, value] of Object.entries(data)) {
-                        const field = document.getElementById(key);
-                        if (field) {
-                            if (field.tagName === 'SELECT') {
-                                const stringValue = typeof value === 'number' ? value.toFixed(1) : value;
-                                const option = Array.from(field.options).find(opt => opt.value === stringValue);
-                                if (option) {
-                                    field.value = stringValue;
-                                }
-                            } else {
-                                field.value = value;
+        fetch('/use_sample')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error fetching sample data: ' + data.error);
+                    return;
+                }
+                for (let [key, value] of Object.entries(data)) {
+                    const field = document.getElementById(key);
+                    if (field) {
+                        if (field.tagName === 'SELECT') {
+                            const stringValue = typeof value === 'number' ? value.toFixed(1) : value;
+                            const option = Array.from(field.options).find(opt => opt.value === stringValue);
+                            if (option) {
+                                field.value = stringValue;
                             }
+                        } else {
+                            field.value = value;
                         }
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while fetching sample data');
-                });
-        });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while fetching sample data');
+            });
+    });
 
-        document.getElementById('clearFormBtn').addEventListener('click', function () {
-            document.getElementById('churnForm').reset();
-        });
+    document.getElementById('clearFormBtn').addEventListener('click', function () {
+        document.getElementById('churnForm').reset();
+    });
 </script>
 {% endblock %}
