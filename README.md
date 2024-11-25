@@ -9,8 +9,8 @@
 1. [Overview](#overview)
 2. [Project Highlights](#project-highlights)
 3. [Data Analysis and Insights](#data-analysis-and-insights)
-4. [Project Structure](#project-structure)
-5. [Features](#features)
+4. [Features](#features)
+5. [Project Structure](#project-structure)
 6. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
    - [Installation](#installation)
@@ -34,6 +34,19 @@ The **Bank Customer Churn Prediction App** is a comprehensive data science proje
 - 🐳 **Containerized Deployment**: Docker support
 - 📈 **Comprehensive Data Analysis**: In-depth exploratory analysis
 
+### Technologies Used
+
+- **Language**: Python 3.11.5
+- **Core Libraries**:
+  - Pandas, NumPy
+  - Scikit-learn
+  - Matplotlib, Seaborn
+
+#### Web & Deployment
+
+- **Framework**: Flask
+- **Containerization**: Docker
+
 ## Demonstration
 
 <p align="center">
@@ -45,7 +58,7 @@ The **Bank Customer Churn Prediction App** is a comprehensive data science proje
 ### Key Findings
 
 - **Churn Rate**: 21% of customers in the dataset
-- **Geographic Trends**: 
+- **Geographic Trends**:
   - Highest churn rate in Germany
 - **Demographic Observations**:
   - Females showed higher churn propensity
@@ -63,6 +76,28 @@ The **Bank Customer Churn Prediction App** is a comprehensive data science proje
 1. Zero-balance accounts have higher churn probability
 2. Credit card ownership minimally impacts churn
 3. Customers with 3-4 products exhibit increased churn risk
+
+## Features
+
+### Machine Learning
+
+- **Ensemble Classifiers**:
+  - XGBoost
+  - LightGBM
+  - CatBoost
+- Advanced preprocessing techniques
+- Hyperparameter optimization
+
+### Web Application
+
+- Intuitive user interface
+- Real-time churn prediction
+- Sample data auto-fill functionality
+
+### Deployment
+
+- Docker containerization
+- Easy-to-use deployment
 
 ## Project Structure
 
@@ -86,41 +121,29 @@ The **Bank Customer Churn Prediction App** is a comprehensive data science proje
 └── dockerfile                  # Docker configuration
 ```
 
-## Features
-
-### Machine Learning
-- **Ensemble Classifiers**:
-  - XGBoost
-  - LightGBM
-  - CatBoost
-- Advanced preprocessing techniques
-- Hyperparameter optimization
-
-### Web Application
-- Intuitive user interface
-- Real-time churn prediction
-- Sample data auto-fill functionality
-
-### Deployment
-- Docker containerization
-- Easy-to-use deployment
-
 ## Getting Started
 
 ### Prerequisites
+
 - Python 3.10+
 - Docker (optional)
 - pip package manager
 
 ### Installation
 
+<p align="left">
+    <img src="images/vnev.png" alt="venv" width="200"/>
+</p>
+
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/bank-churn-prediction.git
    cd bank-churn-prediction
    ```
 
 2. Create virtual environment:
+
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # Unix/macOS
@@ -134,6 +157,10 @@ The **Bank Customer Churn Prediction App** is a comprehensive data science proje
    ```
 
 ### Docker Deployment
+
+<p align="left">
+    <img src="images/docker.png" alt="docker" width="200"/>
+</p>
 
 ```bash
 # Build Docker image
@@ -150,16 +177,18 @@ docker run -p 5000:5000 sayedgamal/churn-prediction-app:latest
 ## Usage
 
 ### Web Application
+
 1. Navigate to `http://localhost:5000`
 2. Input customer details
 3. Click "Predict" for churn probability
 
 ### Jupyter Notebook
+
 Explore detailed analysis in `bank-customer-churn-prediction-0-891-auc-score.ipynb`
 
 ## Technical Components
 
-- **Preprocessing**: 
+- **Preprocessing**:
   - Target encoding
   - Feature scaling
   - Custom engineering pipelines
@@ -177,21 +206,24 @@ Explore detailed analysis in `bank-customer-churn-prediction-0-891-auc-score.ipy
 
 ## Example Scenario
 
-| Feature           | Value     |
-|------------------|-----------|
-| Age              | 45        |
-| Credit Score     | 750       |
-| Geography        | Germany   |
-| Gender           | Female    |
-| Active Member    | Yes       |
+| Feature       | Value   |
+| ------------- | ------- |
+| Age           | 45      |
+| Credit Score  | 750     |
+| Geography     | Germany |
+| Gender        | Female  |
+| Active Member | Yes     |
+
+etc..
 
 **Predicted Churn Probability**: 76%
 
 ## Contributing
 
-Contributions are welcome! 
+Contributions are welcome!
 
 Steps to contribute:
+
 1. Fork the repository
 2. Create your feature branch
 3. Commit changes
