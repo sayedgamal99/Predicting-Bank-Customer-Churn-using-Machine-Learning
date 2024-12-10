@@ -171,7 +171,7 @@ docker run -p 5000:5000 churn-prediction-app
 
 # OR pull pre-built image
 docker pull sayedgamal/churn-prediction-app:latest
-docker run -p 5000:5000 sayedgamal/churn-prediction-app:latest
+docker run -d -p 5000:5000 sayedgamal/churn-prediction-app:latest
 ```
 
 ## Usage
