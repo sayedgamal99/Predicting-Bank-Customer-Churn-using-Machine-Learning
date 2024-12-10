@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="images/cover.png" alt="Bank Churn Cover" width="600"/>
+    <img src="images/cover.png" alt="Bank Churn Cover" width="800"/>
 </p>
 
 # Bank Customer Churn Prediction App
