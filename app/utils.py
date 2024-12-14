@@ -82,7 +82,7 @@ def load_test_data():
     try:
         logger.info("Loading test data...")
         test_data = pd.read_csv(
-            './models/data/playground-series-s4e1/train.csv')
+            './models/data/playground-series-s4e1/test.csv')
         logger.info("Test data loaded successfully.")
         return test_data
     except Exception as e:
